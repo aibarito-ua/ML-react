@@ -1,103 +1,74 @@
-import DashboardPageLayout from "../pages/dashboard/DashboardPageLayout";
 import HomePage from "../pages/home/HomePage";
 import { RouteType } from "./config";
-import DefaultPage from "../pages/dashboard/DefaultPage";
-import DashboardIndex from "../pages/dashboard/DashboardIndex";
-import ChangelogPage from "../pages/changelog/ChangelogPage";
-import AnalyticsPage from "../pages/dashboard/AnalyticsPage";
-import SaasPage from "../pages/dashboard/SaasPage";
-import ComponentPageLayout from "../pages/component/ComponentPageLayout";
-import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
-import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
-import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
-import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBulletedOutlined';
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
-import AlertPage from "../pages/component/AlertPage";
-import ButtonPage from "../pages/component/ButtonPage";
-import InstallationPage from "../pages/installation/InstallationPage";
+import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
+import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import DocumentationPage from "../pages/documentation/DocumentationPage";
+import LJDatasetPageLayout from "../pages/ljdataset/LJDatasetPageLayout";
+import LJDatasetIndex from "../pages/ljdataset/LJDatasetIndex";
+import NvidiaPretrainedPage from "../pages/ljdataset/NvidiaPretrainedPage";
+import AibarTrainedTacotron1Page from "../pages/ljdataset/AibarTrainedTacotron1";
+import AibarTrainedTacotron2Page from "../pages/ljdataset/AibarTrainedTacotron2";
+import WebkitPage from "../pages/webkit/WebkitPage";
+import GrammarlyPage from "../pages/grammarly/GrammarlyPage";
+import GrammarlyPageLayout from "../pages/grammarly/GrammarlyPageLayout";
+import MyCustomGrammarly from "../pages/grammarly/MyCustomGrammarly";
+import GrammarlyIndex from "../pages/grammarly/GrammarlyIndex";
+import AlpacaPage from "../pages/alpaca/AlpacaPage";
 
 const appRoutes: RouteType[] = [
   {
     index: true,
     element: <HomePage />,
-    state: "home"
+    state: "home",
   },
   {
-    path: "/installation",
-    element: <InstallationPage />,
-    state: "installation",
+    path: "/ljdataset",
+    element: <LJDatasetPageLayout />,
+    state: "ljdataset",
     sidebarProps: {
-      displayText: "Installation",
-      icon: <FileDownloadOutlinedIcon />
-    }
-  },
-  {
-    path: "/dashboard",
-    element: <DashboardPageLayout />,
-    state: "dashboard",
-    sidebarProps: {
-      displayText: "Dashboard",
-      icon: <DashboardOutlinedIcon />
+      displayText: "LJDataset",
+      icon: <DashboardOutlinedIcon />,
     },
     child: [
       {
         index: true,
-        element: <DashboardIndex />,
-        state: "dashboard.index"
+        element: <LJDatasetIndex />,
+        state: "ljdataset.index",
       },
       {
-        path: "/dashboard/default",
-        element: <DefaultPage />,
-        state: "dashboard.default",
+        path: "/ljdataset/nvidiapretrained",
+        element: <NvidiaPretrainedPage />,
+        state: "ljdataset.nvidiapretrained",
         sidebarProps: {
-          displayText: "Default"
+          displayText: "NvidiaPretrained",
         },
       },
       {
-        path: "/dashboard/analytics",
-        element: <AnalyticsPage />,
-        state: "dashboard.analytics",
+        path: "/ljdataset/aibartrainedtacotron1",
+        element: <AibarTrainedTacotron1Page />,
+        state: "ljdataset.aibartrainedtacotron1",
         sidebarProps: {
-          displayText: "Analytic"
-        }
+          displayText: "AibarTrainedTacotron1",
+        },
       },
       {
-        path: "/dashboard/saas",
-        element: <SaasPage />,
-        state: "dashboard.saas",
+        path: "/ljdataset/aibartrainedtacotron2",
+        element: <AibarTrainedTacotron2Page />,
+        state: "ljdataset.aibartrainedtacotron2",
         sidebarProps: {
-          displayText: "Saas"
-        }
-      }
-    ]
+          displayText: "AibarTrainedTacotron2",
+        },
+      },
+    ],
   },
   {
-    path: "/component",
-    element: <ComponentPageLayout />,
-    state: "component",
+    path: "/webkit",
+    element: <WebkitPage />,
+    state: "webkit",
     sidebarProps: {
-      displayText: "Components",
-      icon: <AppsOutlinedIcon />
+      displayText: "Webkit",
+      icon: <ArticleOutlinedIcon />,
     },
-    child: [
-      {
-        path: "/component/alert",
-        element: <AlertPage />,
-        state: "component.alert",
-        sidebarProps: {
-          displayText: "Alert"
-        },
-      },
-      {
-        path: "/component/button",
-        element: <ButtonPage />,
-        state: "component.button",
-        sidebarProps: {
-          displayText: "Button"
-        }
-      }
-    ]
   },
   {
     path: "/documentation",
@@ -105,18 +76,50 @@ const appRoutes: RouteType[] = [
     state: "documentation",
     sidebarProps: {
       displayText: "Documentation",
-      icon: <ArticleOutlinedIcon />
-    }
+      icon: <ArticleOutlinedIcon />,
+    },
   },
   {
-    path: "/changelog",
-    element: <ChangelogPage />,
-    state: "changelog",
+    path: "/alpaca",
+    element: <AlpacaPage />,
+    state: "alpaca",
     sidebarProps: {
-      displayText: "Changelog",
-      icon: <FormatListBulletedOutlinedIcon />
-    }
-  }
+      displayText: "Alpaca",
+      icon: <ArticleOutlinedIcon />,
+    },
+  },
+  {
+    path: "/grammarly",
+    element: <GrammarlyPageLayout />,
+    state: "grammarly",
+    sidebarProps: {
+      displayText: "Grammarly",
+      icon: <ArticleOutlinedIcon />,
+    },
+    child: [
+      {
+        index: true,
+        element: <GrammarlyIndex />,
+        state: "grammarly.index",
+      },
+      {
+        path: "/grammarly/dev",
+        element: <GrammarlyPage />,
+        state: "grammarly.dev",
+        sidebarProps: {
+          displayText: "Grammarly for developers",
+        },
+      },
+      {
+        path: "/grammarly/custom",
+        element: <MyCustomGrammarly />,
+        state: "grammarly.custom",
+        sidebarProps: {
+          displayText: "My custom Grammarly",
+        },
+      },
+    ],
+  },
 ];
 
 export default appRoutes;
