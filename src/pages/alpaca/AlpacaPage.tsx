@@ -1,4 +1,4 @@
-import { Button, css, FormGroup, TextField } from "@mui/material";
+import { Button, css, Divider, FormGroup, TextField } from "@mui/material";
 import { useState } from "react";
 
 type Props = {};
@@ -24,7 +24,7 @@ async function MainProcess(
   instruction: string,
   callback: (a: JSX.Element) => void
 ) {
-  return await postData("http://172.30.1.46:5005/alpaca", { text, instruction })
+  return await postData("http://172.30.1.46:5009/alpaca", { text, instruction })
     .then((data) => {
       console.log(data);
       return data.json();
@@ -32,6 +32,8 @@ async function MainProcess(
     .then(async (data) => {
       console.log("text: ", data);
       callback(<div>{data.output}</div>);
+    }).catch((e:any)=>{
+      callback(<div>Server is not running</div>)
     });
 }
 
@@ -40,19 +42,17 @@ function AlpacaPage(props: Props) {
   const [instruction, setInstruction] = useState("");
   const [output, setOutput] = useState(<div></div>);
   return (
-    <div
-      style={{
-        width: "100%",
-        // height: "700px",
-        alignItems: "center",
-        justifyContent: "center",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
+    <div style={{
+      width: "100%",
+      alignItems: "flex-start",
+      justifyContent: "flex-start",
+      display: "flex",
+      flexDirection: "column",
+      paddingLeft: "10%",
+    }}>
       <form
         style={{
-          width: "500px",
+          width: "800px",
           // height: "1000px",
           justifyContent: "center",
           alignItems: "center",
@@ -63,7 +63,7 @@ function AlpacaPage(props: Props) {
           MainProcess(text, instruction, setOutput);
         }}
       >
-        <h2 style={{ textAlign: "center" }}>Alpaca</h2>
+        <h2 style={{ textAlign: "center" }}>Alpaca-7b Chatbot</h2>
         <FormGroup
           sx={{
             padding: 2,
@@ -112,13 +112,32 @@ function AlpacaPage(props: Props) {
           border: "1px solid",
           borderColor: "green",
           borderRadius: 10,
-          width: "500px",
+          width: "800px",
           padding: 10,
           marginTop: 20,
         }}
       >
         {output}
       </div>
+      <div
+    style={{
+      border: "1px solid",
+      borderColor: "grey",
+      borderRadius: 10,
+      width: "800px",
+      padding: 10,
+      marginTop: 20,
+      fontSize: 15,
+      // fontWeight: "lighter"
+    }}
+      >
+        <p style={{}}>
+        <span style={{fontWeight: "bold"}}>Example:</span> 
+        <p><span style={{fontWeight: "bold"}}>Input:</span> Who are your best friends</p>
+        <p><span style={{fontWeight: "bold"}}>Instruction:</span> You are a Harry Potter</p>
+        <p><span style={{fontWeight: "bold"}}>Result:</span> My best friends are Ron Weasley and Hermione Granger.</p>
+        </p>
+    </div>
     </div>
   );
 }
